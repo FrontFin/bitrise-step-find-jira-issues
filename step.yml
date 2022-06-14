@@ -64,24 +64,75 @@ toolkit:
 
 
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
-    opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this input.
 
-        Can be Markdown formatted text.
+  - project_key: ""
+    opts:
+      title: "Jira project key"
+      summary: "Acronym used in Jira e.g. TEMP, GAS, TEST"
+      description: |
+        This will be used by script to determine tasks ids in git log e.g. TEST-123
       is_expand: true
       is_required: true
-      value_options: []
+      
+  - jira_url: ""
+    opts:
+      title: "Jira project URL"
+      summary: "Base URL to company Jira"
+      description: |
+        This can be e.g. https://company.atlassian.net
+      is_expand: true
+      is_required: true
+      
+  - jira_user_name:
+    opts:
+      title: JIRA user name
+      summary: User name on JIRA (user's email).
+      description: User name on JIRA (user's email).
+      is_required: true
+      is_expand: true
+      is_sensitive: true
+      
+  - jira_api_token: "$JIRA_API_TOKEN"
+    opts:
+      title: "Jira API token"
+      summary: "Token used to authenticate to Jira"
+      description: |
+        You should use secret environment variable
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+      
+  - from_status: "IN REVIEW"
+    opts:
+      title: "Initial status"
+      summary: "Status of tasks which are closed by developer"
+      description: |
+        Status of tasks which are closed by developer and are currently being dpeloyed (may be a column name in Jira)
+      is_expand: true
+      is_required: true
+      
+  - tasks_separator: ""
+    opts:
+      title: "Tasks separator"
+      summary: "Separator used between tasks: comma, space etc."
+      description: |
+        Separator used between tasks: comma, space etc.
+      is_expand: true
+      is_required: true
+      
+  - commits_count: "100"
+    opts:
+      title: "Commits count"
+      summary: "Count of last commits that need to be checked for jira issues in commit message"
+      description: |
+        Count of last commits that need to be checked for jira issues in commit message
+      is_expand: true
+      is_required: true
 
 outputs:
-  - EXAMPLE_STEP_OUTPUT:
+  - TASKS_TO_CLOSE:
     opts:
-      title: "Example Step Output"
-      summary: Summary. No more than 2-3 sentences.
+      title: "List of tasks that have specified status"
+      summary: "List of tasks that have specified status"
       description: |
-        Description of this output.
-
-        Can be Markdown formatted text.
+        List of tasks that have specified status
