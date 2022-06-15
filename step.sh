@@ -28,4 +28,11 @@ tasks_to_close=$(curl -s \
 tasks_to_close=$(echo $tasks_to_close | tr ' ' '|')
 echo $tasks_to_close
 
-envman add --key TASKS_TO_CLOSE --value $tasks_to_close
+if [ -z "$tasks_to_close" ]
+then
+    echo "No tasks to close"
+else
+    echo "Tasks to close: $tasks_to_close"
+    envman add --key TASKS_TO_CLOSE --value $tasks_to_close
+fi
+
