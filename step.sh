@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLOSED_TASKS=$(git --no-pager log --pretty='format:%b' -n $commits_count | grep -oE "($project_key-[0-9]+)" | tr ' ' ',')
+CLOSED_TASKS=$(git --no-pager log --pretty='format:%B' -n $commits_count | grep -oE "($project_key-[0-9]+)" | tr ' ' ',')
 CLOSED_TASKS=$(echo $CLOSED_TASKS | tr ' ' ',')
 
 if [ -z "$CLOSED_TASKS" ]; then
